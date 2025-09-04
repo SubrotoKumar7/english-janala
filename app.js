@@ -4,6 +4,12 @@ const loadLessons = () => {
     .then((data) => showLessons(data.data));
 };
 
+function pronounceWord(word) {
+  const utterance = new SpeechSynthesisUtterance(word);
+  utterance.lang = "en-US"; 
+  window.speechSynthesis.speak(utterance);
+}
+
 const removeActive = () => {
   const lessonsBtn = document.querySelectorAll(".lessons-btn");
   lessonsBtn.forEach((active) => {
@@ -71,7 +77,7 @@ const showLevelWord = (words) => {
                 </div>
                 <div class="flex justify-between items-center mt-4">
                     <div onclick="loadWordDetails(${word.id})" class="p-2 bg-[#1A91FF10] hover:bg-[#1A91FF50] rounded cursor-pointer"><i class="fa-solid fa-circle-info"></i></div>
-                    <div class="p-2 bg-[#1A91FF10] hover:bg-[#1A91FF50] rounded cursor-pointer"><i class="fa-solid fa-volume-high"></i></div>
+                    <div onclick="pronounceWord('${word.word}')" class="p-2 bg-[#1A91FF10] hover:bg-[#1A91FF50] rounded cursor-pointer"><i class="fa-solid fa-volume-high"></i></div>
                 </div>
             </div>
         `;
