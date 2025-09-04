@@ -118,3 +118,16 @@ const spinner = (status) => {
     document.getElementById('spinner').classList.add("hidden");
   }
 }
+
+document.getElementById('btn-search').addEventListener('click', () => {
+  removeActive();
+  const userInput = document.getElementById('user-input');
+  const searchValue = userInput.value.trim().toLowerCase();
+  fetch('https://openapi.programming-hero.com/api/words/all')
+  .then(res => res.json())
+  .then(data => {
+    const words = data.data;
+    const filter = words.filter((word) => word.word.toLowerCase().includes(searchValue));
+    showLevelWord(filter);
+  })
+})
